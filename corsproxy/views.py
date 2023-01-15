@@ -7,6 +7,8 @@ from django.conf import settings
 def index(request):
     url = parse.quote(request.GET.get('url'))
     url = url.replace('%3A', ':')
+    url = url.replace('%3F', '?')
+    url = url.replace('%3D', '=')
 
     host = request.META.get('HTTP_ORIGIN')
     if host not in settings.ALLOWED_ORIGINS:
