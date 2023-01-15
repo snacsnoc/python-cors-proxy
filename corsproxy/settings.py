@@ -50,7 +50,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsproxy.cors.Middleware'
+    'corsproxy.cors.Middleware',
+    'django.middleware.gzip.GZipMiddleware',
 ]
 
 ROOT_URLCONF = 'corsproxy.urls'
