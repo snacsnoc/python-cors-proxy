@@ -35,6 +35,12 @@ ALLOWED_HOSTS = [
     'python-cors-proxy.herokuapp.com'
 ]
 
+ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS')
+
+if ALLOWED_ORIGINS is not None:
+    ALLOWED_ORIGINS = ALLOWED_ORIGINS.split(',')
+else:
+    ALLOWED_ORIGINS = []
 
 # Application definition
 
