@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsproxy.cors.Middleware',
     'django.middleware.gzip.GZipMiddleware',
+    'cache_headers.middleware.CacheHeadersMiddleware',
 ]
 
 ROOT_URLCONF = 'corsproxy.urls'
@@ -85,6 +86,16 @@ DATABASES = {
     }
 }
 
+# Caches
+# https://docs.djangoproject.com/en/4.1/topics/cache
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
