@@ -2,8 +2,10 @@ import urllib.request as req
 import urllib.parse as parse
 from django.http import HttpResponse
 from django.conf import settings
+from django.views.decorators.cache import cache_page
 
-
+# Set cache to 60 mins
+@cache_page(60 * 60)
 def index(request):
     url = parse.quote(request.GET.get('url'))
     url = url.replace('%3A', ':')
