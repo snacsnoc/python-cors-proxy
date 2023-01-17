@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import sys
+
 try:
     import django_heroku
 except ImportError:
@@ -25,64 +26,58 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#1awt&wk+46=+&(!g!)7empbih+&bjtb21s4u%y_a1x9maqdqk'
+SECRET_KEY = "#1awt&wk+46=+&(!g!)7empbih+&bjtb21s4u%y_a1x9maqdqk"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get("DJANGO_DEBUG", "FALSE").upper() == "TRUE"
 
-ALLOWED_HOSTS = [
-    'localhost',
-    'python-cors-proxy.herokuapp.com'
-]
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost").split(",")
 
-ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS')
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS")
 
 if ALLOWED_ORIGINS is not None:
-    ALLOWED_ORIGINS = ALLOWED_ORIGINS.split(',')
+    ALLOWED_ORIGINS = ALLOWED_ORIGINS.split(",")
 else:
     ALLOWED_ORIGINS = []
 
 # Application definition
 
-INSTALLED_APPS = [
-    'django.contrib.staticfiles',
-    'corsproxy'
-]
+INSTALLED_APPS = ["django.contrib.staticfiles", "corsproxy"]
 
 MIDDLEWARE = [
-    'corsproxy.cors.Middleware',
-    'django.middleware.gzip.GZipMiddleware',
-    'cache_headers.middleware.CacheHeadersMiddleware',
+    "corsproxy.cors.Middleware",
+    "django.middleware.gzip.GZipMiddleware",
+    "cache_headers.middleware.CacheHeadersMiddleware",
 ]
 
-ROOT_URLCONF = 'corsproxy.urls'
+ROOT_URLCONF = "corsproxy.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'corsproxy.wsgi.application'
+WSGI_APPLICATION = "corsproxy.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
@@ -91,26 +86,24 @@ DATABASES = {
 
 
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/var/tmp/django_cache',
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "/var/tmp/django_cache",
     }
 }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-
-]
+AUTH_PASSWORD_VALIDATORS = []
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -122,11 +115,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
 if DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    if 'django_heroku' in sys.modules:
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    if "django_heroku" in sys.modules:
         django_heroku.settings(locals())
