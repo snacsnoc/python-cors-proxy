@@ -18,10 +18,12 @@ def index(request):
     url = url.replace("%3A", ":")
     url = url.replace("%3F", "?")
     url = url.replace("%3D", "=")
+    if url == "ping":
+        return HttpResponse("pong", status=200)
 
     host = request.META.get("HTTP_ORIGIN")
     if host not in settings.ALLOWED_ORIGINS:
-        return HttpResponse("Invalid origin: "+ host, status=403)
+        return HttpResponse("Invalid origin ", status=403)
 
     headers = {
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) Firefox/106.0.1",
