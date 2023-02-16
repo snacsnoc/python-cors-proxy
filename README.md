@@ -2,31 +2,31 @@
 
 A simple CORS proxy in Python/Django to fetch content from remote sites without a CORS policy. 
 
+This is a fork from [fraigo/python-cors-proxy](https://github.com/fraigo/python-cors-proxy) with added *quality of life* features.
 
 
 ## Run a web server locally
 
-1. [Install Python 3](https://developerhowto.com/2018/10/31/install-python-and-web-development-tools/)
+1. Install dependencies 
 
-2. Run the package installation
+`pip install -r requirements.txt`
 
-`pip install -r requirements-dev.txt`
+2. Set environment variables
 
-(`python3 -m pip install -r requirements-dev.txt` if your default is python2)
+`SECRET_KEY` Django secret key
+`DJANGO_DEBUG` Django debug flag, set  to TRUE to enable. Default disabled
+`ALLOWED_HOSTS` Allowed hosts string
+`ALLOWED_ORIGINS` Allowed origins string
 
 3. Start the local web server
 
-`python manage.py runserver`
+`python3 manage.py runserver`
 
-(`python3 manage.py runserver` if your default is python2)
-
-4. You application will be served at http://localhost:8000/
+4. Your application will be served at http://localhost:8000/
 
 You can modify the local port (current, `8000`) running the server with an extra parameter:
 
-`python manage.py runserver 0.0.0.0:LOCALPORT`
-
-(`python3 manage.py runserver 0.0.0.0:LOCALPORT` if your default is python2)
+`python3 manage.py runserver 0.0.0.0:LOCALPORT` if your default is python2
 
 ## Run locally using Docker
 
@@ -34,7 +34,7 @@ You can modify the local port (current, `8000`) running the server with an extra
 
 2. Run `docker-compose up` from the application folder (`docker-compose up -d` to leave it in the foreground and `docker-compose stop` to stop it)
 
-3. You application will be served at http://localhost:8000/
+3. Your application will be served at http://localhost:8000/
 
 You can modify the local port (current, `8000`) changing `docker-compose.yml`
 
@@ -70,13 +70,13 @@ You can install this tool following [the official guide](https://devcenter.herok
 
 The main steps are:
 
-1.- For MacOS, install Homebrew and run
+1.- For macOS, install Homebrew and run
 `brew install heroku/brew/heroku`
 
-2.- In Ubuntu/Debian based systems, install SnapCraftand run
+2.- In Ubuntu/Debian based systems, install SnapCraft and run
 `sudo snap install --classic heroku`
 
-3.- For windows, download and execute the installer.
+3.- For Windows, download and execute the installer.
 
 ### Create a Heroku Account 
 
@@ -85,14 +85,14 @@ Create an account in Heroku.com to login (https://signup.heroku.com/)
 
 ### Login into Heroku
 
-You need an accout in Heroku.com to login.
+You need an account in Heroku.com to login.
 
 `heroku login [--interactive]`
 
 ### Register your application in Heroku
 
 1. Manual registration:
-    1. After registation, go to https://dashboard.heroku.com/
+    1. After registration, go to https://dashboard.heroku.com/
     2. Create a new application using the button [Add] (https://dashboard.heroku.com/new-app)
 2. Using Heroku CLI:
     1. Run in your project:
@@ -106,13 +106,13 @@ ALLOWED_HOSTS = [
 ]
 ```
 
-### Asociate your repository with Heroku
+### Connect your repository with Heroku
 
 Optionally, register your application as a python/django project:
 
 `heroku buildpacks:set heroku/python`
 
-Also, if you registered the applciation **using the web dashboard**, run this command, using the **app name** you previously registered in Heroku
+Also, if you registered the application **using the web dashboard**, run this command, using the **app name** you previously registered in Heroku
 
 `heroku git:remote -a your-app-name`
 
@@ -121,5 +121,5 @@ Also, if you registered the applciation **using the web dashboard**, run this co
 `git push heroku master`
 
 
-Now your application is published at `http://your-app-name.herokuapp.com/`
+Now your application is published at `https://your-app-name.herokuapp.com/`
 

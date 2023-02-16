@@ -41,7 +41,5 @@ def index(request):
     except req.HTTPError as err:
         return HttpResponse("HTTP ERROR " + url, status=err.code)
     except req.URLError as err:
-        return HttpResponse('URL ERROR ' + url, status=500)
-    except:
-        return HttpResponse("REQUEST ERROR " + url, status=500)
+        return HttpResponse('URL ERROR '+  err + url, status=500)
     return HttpResponse(content, status=200)
