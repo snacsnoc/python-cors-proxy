@@ -15,8 +15,11 @@ For benchmarks, see BENCHMARKS.md
 2. Set environment variables
 
 `SECRET_KEY` Django secret key
+
 `DJANGO_DEBUG` Django debug flag, set  to TRUE to enable. Default disabled
+
 `ALLOWED_HOSTS` Allowed hosts string
+
 `ALLOWED_ORIGINS` Allowed origins string
 
 3. Start the local web server
