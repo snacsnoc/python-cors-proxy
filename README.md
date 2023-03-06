@@ -2,8 +2,9 @@
 
 A simple CORS proxy in Python/Django to fetch content from remote sites without a CORS policy. 
 
-This is a fork from [fraigo/python-cors-proxy](https://github.com/fraigo/python-cors-proxy) with added *quality of life* features.
+This is a fork of [fraigo/python-cors-proxy](https://github.com/fraigo/python-cors-proxy) with added *quality of life* features.
 
+For benchmarks, see BENCHMARKS.md
 
 ## Run a web server locally
 
@@ -26,7 +27,7 @@ This is a fork from [fraigo/python-cors-proxy](https://github.com/fraigo/python-
 
 You can modify the local port (current, `8000`) running the server with an extra parameter:
 
-`python3 manage.py runserver 0.0.0.0:LOCALPORT` if your default is python2
+`python3 manage.py runserver 0.0.0.0:LOCALPORT` 
 
 ## Run locally using Docker
 
@@ -97,13 +98,11 @@ You need an account in Heroku.com to login.
 2. Using Heroku CLI:
     1. Run in your project:
     `heroku apps:create your-app-name`
-3. Edit `ALLOWED_HOSTS` in `corsproxy/settings.py`: 
+3. Set `ALLOWED_HOSTS` in environment variables/secrets: 
     
-```python
-ALLOWED_HOSTS = [
-    'localhost',
-    'your-app-name.herokuapp.com'
-]
+Example:
+```
+ALLOWED_HOSTS = localhost,your-app-name.herokuapp.com
 ```
 
 ### Connect your repository with Heroku
